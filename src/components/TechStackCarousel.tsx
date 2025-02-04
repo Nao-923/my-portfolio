@@ -18,7 +18,7 @@ const techIcons = [
   "/icons/Node-RED.png",
   "/icons/Notion.png",
   "/icons/PlatformIO.png",
-  "/icons/Raspberrypi.png",
+  "/icons/RaspberryPi.png",
   "/icons/React.png",
   "/icons/Render.png",
   "/icons/Tailscale.png",
