@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 
 export default function Profile() {
   return (
@@ -8,7 +8,7 @@ export default function Profile() {
 
       {/* プロフィール画像 */}
       <div className="relative z-10 flex-1 w-full text-center md:text-left md:flex md:flex-col md:items-start md:justify-between md:pl-6 max-w-md rounded-lg flex items-center justify-center overflow-hidden">
-        <img src="/Profile.png" alt="プロフィール画像" className="w-full h-full object-cover" />
+        <Image src="/Profile.png" alt="プロフィール画像" fill className="cover" />
       </div>
 
       {/* プロフィール情報 */}
@@ -28,8 +28,8 @@ export default function Profile() {
         </div>
         {/* 技術スタック画像 */}
         <h2 className="text-2xl font-bold text-left col-span-2">Tech</h2>
-        <div className="mt-auto rounded-lg flex items-center justify-center overflow-hidden" style={{ width: '100%', height: '200px' }}>
-          <img src="/TechList.png" alt="技術スタック画像" className="w-full h-full object-cover" />
+        <div className="mt-auto rounded-lg flex items-center justify-center overflow-hidden relative" style={{ width: '100%', height: '200px' }}>
+          <Image src="/TechList.png" alt="技術スタック画像" fill className="cover" />
         </div>
       </div>
     </div>
