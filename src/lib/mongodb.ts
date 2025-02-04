@@ -5,8 +5,8 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mydata
 if (!MONGODB_URI) {
   throw new Error("MONGODB_URI is not defined in environment variables");
 }
-
-let cached = (global as any).mongoose || { conn: null, promise: null };
+/* eslint-disable */
+const cached = (global as any).mongoose || { conn: null, promise: null };
 
 async function connectToDatabase() {
   if (cached.conn) return cached.conn;
