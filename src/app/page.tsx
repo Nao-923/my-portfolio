@@ -37,7 +37,11 @@ export default function Home() {
     "作業環境": "bg-indigo-400 text-indigo-900",
     "ウイスキー": "bg-orange-400 text-orange-900",
     "酒": "bg-pink-400 text-pink-900",
-    "リスト": "bg-teal-400 text-teal-900"
+    "リスト": "bg-teal-400 text-teal-900",
+    "マイページ": "bg-blue-500 text-blue-900",
+    "ポートフォリオ": "bg-purple-500 text-purple-900",
+    "Next.js": "bg-black text-white",
+    "MongoDB": "bg-green-500 text-green-900",
   };
 
   useEffect(() => {
