@@ -16,6 +16,7 @@ interface Content {
 export default function Home() {
   const [contents, setContents] = useState<Content[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [filteredContents, setFilteredContents] = useState<Content[]>([]);
 
   const tagColors: Record<string, string> = {
     "Fanatec": "bg-red-300 text-red-800",
@@ -37,7 +38,11 @@ export default function Home() {
     "作業環境": "bg-indigo-400 text-indigo-900",
     "ウイスキー": "bg-orange-400 text-orange-900",
     "酒": "bg-pink-400 text-pink-900",
-    "リスト": "bg-teal-400 text-teal-900"
+    "リスト": "bg-teal-400 text-teal-900",
+    "マイページ": "bg-blue-500 text-blue-900",
+    "ポートフォリオ": "bg-purple-500 text-purple-900",
+    "Next.js": "bg-black text-white",
+    "MongoDB": "bg-green-500 text-green-900",
   };
 
   useEffect(() => {
@@ -47,6 +52,8 @@ export default function Home() {
         if (!res.ok) throw new Error("Failed to fetch contents");
         const data: Content[] = await res.json();
         setContents(data);
+        setSelectedTag(null);
+        setFilteredContents(selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents);
       } catch (error) {
         console.error("Error fetching contents:", error);
       }
@@ -54,7 +61,12 @@ export default function Home() {
     fetchContents();
   }, []);
 
-  const filteredContents = selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents;
+  const changeSelectTag = async (tag: string | null) => {
+    setSelectedTag(tag);
+    setFilteredContents([]);
+    setFilteredContents(selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents);
+  }
+
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
@@ -65,7 +77,7 @@ export default function Home() {
       <div className="relative z-10 my-6 flex flex-wrap gap-2 justify-center">
         <button onClick={() => setSelectedTag(null)} className="bg-gray-300 px-3 py-1 rounded-full text-sm font-semibold">すべて表示</button>
         {Object.keys(tagColors).map((tag, index) => (
-          <button key={index} onClick={() => setSelectedTag(tag)} className={`px-3 py-1 rounded-full text-sm font-semibold ${tagColors[tag]} ${selectedTag === tag ? "ring-2 ring-offset-2 ring-blue-500" : ""}`}>
+          <button key={index} onClick={() => changeSelectTag(tag)} className={`px-3 py-1 rounded-full text-sm font-semibold ${tagColors[tag]} ${selectedTag === tag ? "ring-2 ring-offset-2 ring-blue-500" : ""}`}>
             {tag}
           </button>
         ))}

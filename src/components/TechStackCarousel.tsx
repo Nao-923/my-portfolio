@@ -73,8 +73,8 @@ export default function TechStackCarousel() {
     const interval = setInterval(() => {
       setIcons((prevIcons) =>
         prevIcons.map((icon) => {
-          let newX = icon.x + icon.dx;
-          let newY = icon.y + icon.dy;
+          const newX = icon.x + icon.dx;
+          const newY = icon.y + icon.dy;
           let newDx = icon.dx;
           let newDy = icon.dy;
 

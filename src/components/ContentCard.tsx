@@ -1,39 +1,41 @@
-// src/components/ContentCard.tsx
-interface Content {
-    title: string;
-    description: string;
-    url: string;
-    image: string;
-    tags: string[];
-  }
-  interface ContentCardProps {
-    title: string;
-    description: string;
-    url: string;
-    image: string;
-    tags: string[];
-    tagColors: Record<string, string>;
-  }
-  
+import Image from "next/image"
 
-  
-  export default function ContentCard({ title, description, url, image, tags, tagColors }: ContentCardProps) {
+interface ContentCardProps {
+    title: string
+    description: string
+    url: string
+    image: string
+    tags: string[]
+    tagColors: Record<string, string>
+}
+
+export default function ContentCard({ title, description, url, image, tags, tagColors }: ContentCardProps) {
     return (
-      <a href={url} target="_blank" rel="noopener noreferrer" className="block bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition flex flex-col h-full min-h-[300px]">
-        <img src={image} alt={title} className="w-full h-48 object-cover" />
-        <div className="p-4 flex-1 flex flex-col justify-between">
-          <div>
-            <h3 className="text-lg font-bold">{title}</h3>
-            <p className="text-gray-600 mt-2">{description}</p>
-          </div>
-          <div className="mt-auto flex flex-wrap gap-2">
-            {tags.map((tag: string, index: number) => (
-            <span key={index} className={`px-2 py-1 rounded-full text-xs font-semibold ${tagColors[tag] || "bg-gray-200 text-gray-700"}`}>
-                {tag}
-            </span>
-            ))}
-          </div>
+        <div className="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+                <a href={url} target="_blank" rel="noopener noreferrer" className="relative w-full pt-[56.25%]">
+                <Image
+                    src={image || "/placeholder.svg"}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+            </a>
+            <div className="p-5 flex-1 flex flex-col">
+                <h3 className="font-bold text-lg mb-2 line-clamp-2">{title}</h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">{description}</p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                    {tags.map((tag: string, index: number) => (
+                        <span
+                            key={index}
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${tagColors[tag] || "bg-gray-200 text-gray-700"}`}
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            </div>
         </div>
-      </a>
-    );
-  }
+    )
+}
+
