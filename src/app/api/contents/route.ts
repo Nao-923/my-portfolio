@@ -18,6 +18,7 @@ export async function GET() {
     const contents = await Content.find({});
     return NextResponse.json(contents);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Failed to fetch contents" }, { status: 500 });
   }
 }
@@ -36,6 +37,7 @@ export async function POST(req: Request) {
     await newContent.save();
     return NextResponse.json(newContent, { status: 201 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Failed to add content" }, { status: 500 });
   }
 }
@@ -58,11 +60,12 @@ export async function PUT(req: Request) {
 
     return NextResponse.json(updatedContent);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Failed to update content" }, { status: 500 });
   }
 }
 
-// ✅ コンテンツの削除 (DELETE)
+// ✅ コンテンツの削除 (DELETE)F
 export async function DELETE(req: Request) {
   try {
     await connectToDatabase();
@@ -80,6 +83,7 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ message: "Content deleted successfully" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Failed to delete content" }, { status: 500 });
   }
 }
