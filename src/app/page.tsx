@@ -53,7 +53,7 @@ export default function Home() {
         const data: Content[] = await res.json();
         setContents(data);
         setSelectedTag(null);
-        setFilteredContents(selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents);
+        setFilteredContents(data);
       } catch (error) {
         console.error("Error fetching contents:", error);
       }
@@ -61,10 +61,11 @@ export default function Home() {
     fetchContents();
   }, []);
 
-  const changeSelectTag = async (tag: string | null) => {
+  function changeSelectTag(tag: string | null){
+    console.log("---------hoigegeg-----------")
     setSelectedTag(tag);
-    setFilteredContents([]);
-    setFilteredContents(selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents);
+    const selected = selectedTag ? contents.filter(content => content.tags.includes(selectedTag)) : contents;
+    setFilteredContents(selected);
   }
 
 
