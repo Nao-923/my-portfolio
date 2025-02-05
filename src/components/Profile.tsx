@@ -2,14 +2,20 @@ import Image from "next/image";
 
 export default function Profile() {
   return (
-    <div className="relative bg-white shadow-md rounded-lg p-6 w-full max-w-8xl mx-auto flex flex-col md:flex-row items-center md:items-stretch md:justify-center overflow-hidden">
-        {/* <div className="relative bg-white shadow-md rounded-lg p-6 w-full max-w-8xl mx-auto flex flex-col md:flex-row items-center md:items-stretch md:justify-center overflow-hidden" style={{ width: "800px", height: "300px" }}> */}
-
-
-      {/* プロフィール画像 */}
-      <div className="relative z-10 flex-1 w-full text-center md:text-left md:flex md:flex-col md:items-start md:justify-between md:pl-6 max-w-md rounded-lg flex items-center justify-center overflow-hidden">
-        <Image src="/Profile.png" alt="プロフィール画像" fill className="cover" />
+    <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-8xl mx-auto flex flex-col md:flex-row items-start md:items-stretch md:justify-center overflow-hidden gap-6">
+    {/* Profile Image */}
+    <div className="relative z-10 w-full md:w-1/2 md:max-w-sm">
+      <div className="relative w-full aspect-[1/1] rounded-lg overflow-hidden">
+        <Image
+          src="/Profile.png"
+          alt="プロフィール画像"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
+    </div>
+
 
       {/* プロフィール情報 */}
       <div className="relative z-10 flex-1 w-full text-center md:text-left md:flex md:flex-col md:items-start md:justify-between md:pl-6 max-w-md">
