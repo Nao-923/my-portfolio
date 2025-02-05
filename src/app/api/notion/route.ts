@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    console.log("API Route Hit: /api/notion");
-
     const response = await fetch(
       `https://api.notion.com/v1/databases/${process.env.NEXT_PUBLIC_NOTION_DATABASE_ID}/query`,
       {

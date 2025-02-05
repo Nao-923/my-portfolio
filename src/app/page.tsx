@@ -12,6 +12,24 @@ interface Content {
   image: string;
   tags: string[];
 }
+interface NotionResponse<T> {
+  results: Array<{ properties: T }>;
+}
+
+interface ContentProperties {
+  title?: { title: { plain_text: string }[] };
+  description?: { rich_text: { plain_text: string }[] };
+  url?: { url: string };
+  image?: { files: { file: { url: string } }[] };
+  tags?: { rich_text: { plain_text: string }[] };
+}
+interface TagProperties {
+  title?: { title: { plain_text: string }[] };
+  fontColor?: { rich_text: { plain_text: string }[] };
+  backColor?: { rich_text: { plain_text: string }[] };
+}
+
+
 
 export default function Home() {
   const [contents, setContents] = useState<Content[]>([]);
@@ -23,12 +41,13 @@ export default function Home() {
       try {
         const response = await fetch("/api/notion");
         if (!response.ok) {
-          console.error("Notion API Error", await response.json());
+          const errorData = await response.json();
+          console.error("Notion API Error:", errorData);
           return;
         }
-
-        const data = await response.json();
-        const formattedContents = data.results.map((item: any) => ({
+  
+        const data: NotionResponse<ContentProperties> = await response.json();
+        const formattedContents: Content[] = data.results.map((item) => ({
           title: item.properties.title?.title[0]?.plain_text || "No Title",
           description: item.properties.description?.rich_text[0]?.plain_text || "No Description",
           url: item.properties.url?.url || "",
@@ -37,37 +56,38 @@ export default function Home() {
             ? item.properties.tags.rich_text[0].plain_text.replace(/["“”]/g, "").split(", ")
             : [],
         }));
-
+  
         setContents(formattedContents);
       } catch (error) {
         console.error("Fetch Error:", error);
       }
     }
-
+  
     async function fetchTagsFromNotion() {
       try {
         const response = await fetch("/api/notion-tags");
         if (!response.ok) {
-          console.error("Notion API Error", await response.json());
+          const errorData = await response.json();
+          console.error("Notion API Error:", errorData);
           return;
         }
-
-        const data = await response.json();
+  
+        const data: NotionResponse<TagProperties> = await response.json();
         const formattedTagColors: Record<string, string> = {};
-
-        data.results.forEach((item: any) => {
+  
+        data.results.forEach((item) => {
           const tagName = item.properties.title?.title[0]?.plain_text || "Unknown";
           const fontColor = item.properties.fontColor?.rich_text[0]?.plain_text || "text-black";
           const backColor = item.properties.backColor?.rich_text[0]?.plain_text || "bg-gray-200";
           formattedTagColors[tagName] = `${backColor} ${fontColor}`;
         });
-
+  
         setTagColors(formattedTagColors);
       } catch (error) {
         console.error("Fetch Error:", error);
       }
     }
-
+  
     fetchContentsFromNotion();
     fetchTagsFromNotion();
   }, []);
