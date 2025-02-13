@@ -2,6 +2,8 @@ name = "my-portfolio"
 main = "./.next/standalone/server.js"
 compatibility_date = "2024-02-13"
 
+nodejs_compat = true
+
 [vars]
 NEXT_PUBLIC_NOTION_API_KEY = "ntn_d20846464906T75ABKTiHgZTfGUAF7rRZtjRv2lZ4KC4wd"
 NEXT_PUBLIC_NOTION_DATABASE_ID = "19107c412e5a8073bf23f7e4509d277e"
