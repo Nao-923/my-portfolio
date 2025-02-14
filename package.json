@@ -5,7 +5,6 @@
   "scripts": {
   "dev": "next dev --turbopack",
   "build": "next build",
-  "prepare": "next-on-pages", 
   "deploy": "wrangler pages publish .vercel/output/static --project-name=my-portfolio",
   "start": "next start",
   "lint": "next lint"
