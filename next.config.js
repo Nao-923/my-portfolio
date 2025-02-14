@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: "export", // Cloudflare Workers で API を動作させる
+    output: "standalone", // Cloudflare Workers で API を動作させる
     experimental: {
       appDir: false, // App Router を無効化（API Routes を `pages/api/` で使うため）
     },
