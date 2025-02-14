@@ -1,10 +1,9 @@
 name = "my-portfolio"
-account_id = "1c874c7bac2e7103b28af7ae1c12852c"
 
 compatibility_date = "2024-02-14"
 
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = ".vercel/output"
 
 [vars]
 NEXT_PUBLIC_NOTION_API_KEY = "ntn_d20846464906T75ABKTiHgZTfGUAF7rRZtjRv2lZ4KC4wd"
