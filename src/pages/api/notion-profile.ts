@@ -1,13 +1,17 @@
-import { NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export async function GET() {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
+
   try {
     const response = await fetch(
-      `https://api.notion.com/v1/databases/${process.env.NEXT_PUBLIC_NOTION_PROFILE_DB_ID}/query`,
+      `https://api.notion.com/v1/databases/${process.env.NOTION_PROFILE_DB_ID}/query`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTION_API_KEY}`,
+          Authorization: `Bearer ${process.env.NOTION_API_KEY}`,
           "Notion-Version": "2022-06-28",
           "Content-Type": "application/json",
         },
@@ -18,17 +22,14 @@ export async function GET() {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Notion API Error:", errorData);
-      return NextResponse.json(
-        { error: "Notion API Error", details: errorData },
-        { status: response.status }
-      );
+      return res.status(response.status).json({ error: "Notion API Error", details: errorData });
     }
 
     const data = await response.json();
     console.log("Notion API Response Data:", JSON.stringify(data, null, 2));
 
     if (!data.results.length) {
-      return NextResponse.json({ error: "No profile data found" }, { status: 404 });
+      return res.status(404).json({ error: "No profile data found" });
     }
 
     const profileData = data.results[0].properties;
@@ -44,8 +45,7 @@ export async function GET() {
       profileImage: profileData.profileImage?.files?.[0]?.file?.url || "",
     };
 
-    return NextResponse.json(formattedProfile, { status: 200 });
-
+    return res.status(200).json(formattedProfile);
   } catch (error) {
     console.error("Internal Server Error:", error);
 
@@ -54,9 +54,6 @@ export async function GET() {
       errorMessage = error.message;
     }
 
-    return NextResponse.json(
-      { error: "Internal Server Error", details: errorMessage },
-      { status: 500 }
-    );
+    return res.status(500).json({ error: "Internal Server Error", details: errorMessage });
   }
 }

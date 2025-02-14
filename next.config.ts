@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: "export",
   images: {
     domains: ["prod-files-secure.s3.us-west-2.amazonaws.com"],
   },
