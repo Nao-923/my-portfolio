@@ -32,7 +32,7 @@ export async function GET() {
     }
 
     const profileData = data.results[0].properties;
-    console.log("Profile Data from Notion:", JSON.stringify(profileData, null, 2));
+    // console.log("Profile Data from Notion:", JSON.stringify(profileData, null, 2));
 
     const formattedProfile = {
       name: profileData.name?.rich_text?.[0]?.plain_text || "No Name",

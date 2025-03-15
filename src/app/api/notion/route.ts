@@ -25,8 +25,8 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log("Notion API Response:", data);
-    console.log(JSON.stringify(data.results[0], null, 2));
+    // console.log("Notion API Response:", data);
+
     return NextResponse.json(data);
   } catch (error) {
     console.error("Internal Server Error:", error);
