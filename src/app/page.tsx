@@ -102,7 +102,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-100 p-6">
       <h1 className="relative z-10 text-4xl font-bold text-center mb-8">Welcome to My Page !</h1>
-      <h1 className="relative z-10 text-2xl font-bold text-center mb-8 text-red-600">※記事は未完成のものが多数あります</h1>
+      <h1 className="relative z-10 text-2xl font-bold text-center mb-8 text-red-600">※未完成の記事が多数あります</h1>
       <div className="relative z-10">
         <Profile />
       </div>
