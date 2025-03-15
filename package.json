@@ -12,6 +12,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.6",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.7",
     "@eslint/eslintrc": "^3",
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
