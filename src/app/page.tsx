@@ -22,6 +22,7 @@ interface ContentProperties {
   url?: { url: string };
   image?: { files: { file: { url: string } }[] };
   tags?: { rich_text: { plain_text: string }[] };
+  status?: { status: { name: string; color: string } }; // 修正ポイント
 }
 interface TagProperties {
   title?: { title: { plain_text: string }[] };
@@ -55,6 +56,8 @@ export default function Home() {
           tags: item.properties.tags?.rich_text[0]?.plain_text
             ? item.properties.tags.rich_text[0].plain_text.replace(/["“”]/g, "").split(", ")
             : [],
+          status: item.properties.status?.status?.name || "No Status", // 正しいステータスの取得
+          statusColor: item.properties.status?.status?.color || "default",
         }));
   
         setContents(formattedContents);
@@ -99,6 +102,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-100 p-6">
       <h1 className="relative z-10 text-4xl font-bold text-center mb-8">Welcome to My Page !</h1>
+      <h1 className="relative z-10 text-2xl font-bold text-center mb-8 text-red-600">※記事は未完成のものが多数あります</h1>
       <div className="relative z-10">
         <Profile />
       </div>

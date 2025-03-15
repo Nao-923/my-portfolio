@@ -25,7 +25,7 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log("Notion API Response Data:", JSON.stringify(data, null, 2));
+    // console.log("Notion API Response Data:", JSON.stringify(data, null, 2));
 
     if (!data.results.length) {
       return NextResponse.json({ error: "No profile data found" }, { status: 404 });
