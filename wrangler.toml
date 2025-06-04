@@ -1,9 +1,0 @@
-name = "mypage"
-compatibility_date = "2024-02-14"  # 適切な日付を指定
-pages_build_output_dir = ".next/server"
-
-[build]
-command = "npm run build"
-
-[vars]
-NODE_VERSION = "18.18.0"
